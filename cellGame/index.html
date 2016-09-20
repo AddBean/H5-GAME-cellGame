@@ -1,0 +1,52 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>cellGame</title>
+    <meta name="viewport" content="user-scalable=no"/>
+    <meta charset="utf-8"/>
+    <meta name="author" content="html5china"/>
+</head>
+<body>
+<canvas id="gameCanvas" width="320" height="480"></canvas>
+<script src="../../frameworks/cocos2d-html5/CCBoot.js"></script>
+<script src="main.js"></script>
+<!-微信Api-->
+<script src="src/WeixinApi.js"></script>
+<img width="500" height="500" style="position:absolute;top:-10000px;"
+     src="http://jsgame.anzhuoshangdian.com/xyt/res/icon.jpg">
+<script>
+    // 微信分享的数据
+    window.wxData = {
+        "appId": "", // 服务号可以填写appId
+        "imgUrl": 'http://114.215.191.133:9007/samples/cellGame/res/logo.png',
+        "link": 'http://114.215.191.133:9007/samples/cellGame/',
+        "desc": "快来制造细菌吧",
+        "title": "细菌制造机"
+    };
+    function share(cell_count,msg,P2) {
+        window.wxData.desc = "我繁殖出了"+cell_count+"个细菌,"+msg;
+    };
+    WeixinApi.ready(function (Api) {
+        // 分享的回调
+        var wxCallbacks = {
+            ready: function () {
+            },
+            cancel: function (resp) {
+            },
+            fail: function (resp) {
+            },
+            confirm: function (resp) {
+            },
+            all: function (resp) {
+            }
+        };
+        Api.shareToFriend(wxData, wxCallbacks);
+        Api.shareToTimeline(wxData, wxCallbacks);
+        Api.shareToWeibo(wxData, wxCallbacks);
+    });
+</script>
+<div style="display:none">
+<script src="http://s95.cnzz.com/stat.php?id=1253054655&web_id=1253054655" language="JavaScript"></script>
+</div>
+</body>
+</html>
